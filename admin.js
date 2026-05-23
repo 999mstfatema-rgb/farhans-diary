@@ -57,11 +57,17 @@ email,
 password
 );
 
+localStorage.setItem('isAdmin','true');
+
 alert('Admin Login Success');
 
 closeLoginModal();
 
+if(!document.getElementById('createPostBtn')){
+
 const btn = document.createElement('button');
+
+btn.id='createPostBtn';
 
 btn.innerText='Create Post';
 
@@ -75,16 +81,29 @@ btn.style.borderRadius='50px';
 btn.style.background='#4f46e5';
 btn.style.color='#fff';
 btn.style.fontWeight='600';
+btn.style.cursor='pointer';
 
 btn.onclick = openPostModal;
 
 document.body.appendChild(btn);
+
+}
+
+location.reload();
 
 }catch(err){
 
 alert(err.message);
 
 }
+
+}
+
+window.logoutAdmin = ()=>{
+
+localStorage.removeItem('isAdmin');
+
+location.reload();
 
 }
 
@@ -135,5 +154,39 @@ alert('Post Published');
 closePostModal();
 
 location.reload();
+
+}
+
+if(localStorage.getItem('isAdmin') === 'true'){
+
+window.addEventListener('load',()=>{
+
+if(!document.getElementById('createPostBtn')){
+
+const btn = document.createElement('button');
+
+btn.id='createPostBtn';
+
+btn.innerText='Create Post';
+
+btn.style.position='fixed';
+btn.style.right='20px';
+btn.style.bottom='90px';
+btn.style.zIndex='9999';
+btn.style.padding='14px 18px';
+btn.style.border='none';
+btn.style.borderRadius='50px';
+btn.style.background='#4f46e5';
+btn.style.color='#fff';
+btn.style.fontWeight='600';
+btn.style.cursor='pointer';
+
+btn.onclick = openPostModal;
+
+document.body.appendChild(btn);
+
+}
+
+});
 
 }
