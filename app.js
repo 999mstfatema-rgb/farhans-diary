@@ -4,7 +4,9 @@ db
 
 import {
 collection,
-getDocs
+getDocs,
+deleteDoc,
+doc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const postsContainer =
@@ -17,9 +19,9 @@ postsContainer.innerHTML='';
 const querySnapshot =
 await getDocs(collection(db,'posts'));
 
-querySnapshot.forEach((doc)=>{
+querySnapshot.forEach((docSnap)=>{
 
-const post = doc.data();
+const post = docSnap.data();
 
 postsContainer.innerHTML += `
 
@@ -30,18 +32,18 @@ ${localStorage.getItem('isAdmin') === 'true'
 ? `
 
 <div class="three-dot"
-onclick="toggleDropdown('${doc.id}')">
+onclick="toggleDropdown('${docSnap.id}')">
 ⋮
 </div>
 
 <div class="dropdown"
-id="dropdown-${doc.id}">
+id="dropdown-${docSnap.id}">
 
-<button onclick="editPost('${doc.id}')">
+<button onclick="editPost('${docSnap.id}')">
 Edit Post
 </button>
 
-<button onclick="deletePost('${doc.id}')">
+<button onclick="deletePost('${docSnap.id}')">
 Delete Post
 </button>
 
@@ -51,17 +53,17 @@ Delete Post
 
 : ''}
 
-<img src="${post.image}">
+<img src="${post.image || ''}">
 
 <div class="content">
 
 <span class="badge">
-${post.category}
+${post.category || 'News'}
 </span>
 
-<h2>${post.title}</h2>
+<h2>${post.title || ''}</h2>
 
-<p>${post.description}</p>
+<p>${post.description || ''}</p>
 
 <div class="stats">
 
@@ -77,7 +79,27 @@ ${post.category}
 🔗 ${post.shares || 0}
 </button>
 
+<button>
+👁 ${post.views || 0}
+</button>
+
 </div>
+
+${post.redirectUrl
+
+? `
+
+<a href="${post.redirectUrl}"
+target="_blank"
+class="read-btn">
+
+Read More
+
+</a>
+
+`
+
+: ''}
 
 </div>
 
@@ -109,9 +131,26 @@ alert('Edit system coming soon');
 
 }
 
-window.deletePost = (id)=>{
+window.deletePost = async(id)=>{
 
-alert('Delete system coming soon');
+const confirmDelete =
+confirm('Are you sure to delete this post?');
+
+if(!confirmDelete) return;
+
+try{
+
+await deleteDoc(doc(db,"posts",id));
+
+alert('Post Deleted Successfully');
+
+location.reload();
+
+}catch(err){
+
+alert(err.message);
+
+}
 
 }
 
@@ -129,7 +168,9 @@ document.body.classList.contains('dark')
 }
 
 if(localStorage.getItem('theme') === 'dark'){
+
 document.body.classList.add('dark');
+
 }
 
 const audio = new Audio(
@@ -139,15 +180,21 @@ const audio = new Audio(
 window.toggleMusic = ()=>{
 
 if(audio.paused){
+
 audio.play();
+
 }else{
+
 audio.pause();
+
 }
 
 }
 
 const searchInput =
 document.getElementById('searchInput');
+
+if(searchInput){
 
 searchInput.addEventListener('keyup',()=>{
 
@@ -167,3 +214,5 @@ card.innerText.toLowerCase()
 });
 
 });
+
+}
