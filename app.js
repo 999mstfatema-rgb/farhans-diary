@@ -25,6 +25,10 @@ postsContainer.innerHTML += `
 
 <div class="card">
 
+${localStorage.getItem('isAdmin') === 'true'
+
+? `
+
 <div class="three-dot"
 onclick="toggleDropdown('${doc.id}')">
 ⋮
@@ -42,6 +46,10 @@ Delete Post
 </button>
 
 </div>
+
+`
+
+: ''}
 
 <img src="${post.image}">
 
