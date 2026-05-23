@@ -1,80 +1,127 @@
 import {
-  db
+db
 } from './firebase.js';
 
 import {
-  collection,
-  getDocs
+collection,
+getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const postsContainer = document.getElementById('postsContainer');
+const postsContainer =
+document.getElementById('postsContainer');
 
 async function loadPosts(){
 
-  postsContainer.innerHTML = '';
+postsContainer.innerHTML='';
 
-  const querySnapshot = await getDocs(collection(db,'posts'));
+const querySnapshot =
+await getDocs(collection(db,'posts'));
 
-  querySnapshot.forEach((doc)=>{
+querySnapshot.forEach((doc)=>{
 
-    const post = doc.data();
+const post = doc.data();
 
-    postsContainer.innerHTML += `
-    <div class="card">
+postsContainer.innerHTML += `
 
-      <img src="${post.image}">
+<div class="card">
 
-      <div class="content">
+<div class="three-dot"
+onclick="toggleDropdown('${doc.id}')">
+⋮
+</div>
 
-        <span class="badge">
-          ${post.category}
-        </span>
+<div class="dropdown"
+id="dropdown-${doc.id}">
 
-        <h2>${post.title}</h2>
+<button onclick="editPost('${doc.id}')">
+Edit Post
+</button>
 
-        <p>${post.description}</p>
+<button onclick="deletePost('${doc.id}')">
+Delete Post
+</button>
 
-        <div class="stats">
+</div>
 
-          <button>
-            👍 ${post.likes || 0}
-          </button>
+<img src="${post.image}">
 
-          <button>
-            💬 ${post.comments || 0}
-          </button>
+<div class="content">
 
-          <button>
-            🔗 ${post.shares || 0}
-          </button>
+<span class="badge">
+${post.category}
+</span>
 
-        </div>
+<h2>${post.title}</h2>
 
-      </div>
+<p>${post.description}</p>
 
-    </div>
-    `;
-  });
+<div class="stats">
+
+<button>
+👍 ${post.likes || 0}
+</button>
+
+<button>
+💬 ${post.comments || 0}
+</button>
+
+<button>
+🔗 ${post.shares || 0}
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
 
 }
 
 loadPosts();
 
+window.toggleDropdown = (id)=>{
+
+const menu =
+document.getElementById(`dropdown-${id}`);
+
+menu.style.display =
+menu.style.display === 'block'
+? 'none'
+: 'block';
+
+}
+
+window.editPost = (id)=>{
+
+alert('Edit system coming soon');
+
+}
+
+window.deletePost = (id)=>{
+
+alert('Delete system coming soon');
+
+}
+
 window.toggleTheme = ()=>{
 
-  document.body.classList.toggle('dark');
+document.body.classList.toggle('dark');
 
-  localStorage.setItem(
-    'theme',
-    document.body.classList.contains('dark')
-    ? 'dark'
-    : 'light'
-  );
+localStorage.setItem(
+'theme',
+document.body.classList.contains('dark')
+? 'dark'
+: 'light'
+);
 
 }
 
 if(localStorage.getItem('theme') === 'dark'){
-  document.body.classList.add('dark');
+document.body.classList.add('dark');
 }
 
 const audio = new Audio(
@@ -83,10 +130,32 @@ const audio = new Audio(
 
 window.toggleMusic = ()=>{
 
-  if(audio.paused){
-    audio.play();
-  }else{
-    audio.pause();
-  }
+if(audio.paused){
+audio.play();
+}else{
+audio.pause();
+}
 
 }
+
+const searchInput =
+document.getElementById('searchInput');
+
+searchInput.addEventListener('keyup',()=>{
+
+const value =
+searchInput.value.toLowerCase();
+
+document.querySelectorAll('.card')
+.forEach(card=>{
+
+card.style.display =
+card.innerText.toLowerCase()
+.includes(value)
+
+? 'block'
+: 'none';
+
+});
+
+});
