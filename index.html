@@ -1,52 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Farhan's Diary</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farhan's Diary</title>
 
-  <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
 <header class="header">
-  <div class="logo">FJR7</div>
 
-  <nav class="nav">
-    <a href="#">Sports</a>
-    <a href="#">News</a>
-    <a href="#">Tech</a>
-    <a href="#">Earning</a>
-    <a href="#">Islamic</a>
-    <a href="#">Entertainment</a>
-    <a href="#">Music</a>
-  </nav>
+<div class="logo">
+FJR7
+</div>
 
-  <div class="header-actions">
-    <input type="text" id="searchInput" placeholder="Search...">
-    <button onclick="toggleTheme()">Theme</button>
-    <button onclick="adminLogin()">Admin</button>
-  </div>
+<nav class="nav">
+
+<a href="#">Sports</a>
+<a href="#">News</a>
+<a href="#">Tech</a>
+<a href="#">Earning</a>
+<a href="#">Islamic</a>
+<a href="#">Entertainment</a>
+<a href="#">Music</a>
+
+</nav>
+
+<div class="header-actions">
+
+<input type="text" id="searchInput" placeholder="Search...">
+
+<button onclick="toggleTheme()">
+Theme
+</button>
+
+<button id="adminBtn" onclick="openLoginModal()">
+Admin Login
+</button>
+
+</div>
+
 </header>
 
 <section class="hero">
-  <h1>Farhan's Diary</h1>
-  <p>Modern Blogging Platform</p>
+
+<h1>Farhan's Diary</h1>
+
+<p>
+Modern Blogging Platform
+</p>
+
 </section>
 
 <section class="posts-section">
-  <h2>Latest Posts</h2>
 
-  <div class="posts" id="postsContainer"></div>
+<h2>Latest Posts</h2>
+
+<div class="posts" id="postsContainer"></div>
+
 </section>
 
+<!-- LOGIN MODAL -->
+
+<div class="login-modal" id="loginModal">
+
+<div class="login-box">
+
+<h2>Admin Login</h2>
+
+<input type="email" id="adminEmail" placeholder="Email">
+
+<input type="password" id="adminPassword" placeholder="Password">
+
+<button onclick="adminLogin()">
+Login
+</button>
+
+<button class="close-btn" onclick="closeLoginModal()">
+Close
+</button>
+
+</div>
+
+</div>
+
+<!-- CREATE POST MODAL -->
+
+<div class="post-modal" id="postModal">
+
+<div class="post-box">
+
+<h2>Create New Post</h2>
+
+<input type="text" id="postTitle" placeholder="Post Title">
+
+<input type="text" id="postImage" placeholder="Image URL">
+
+<input type="text" id="postVideo" placeholder="Video URL">
+
+<input type="text" id="postCategory" placeholder="Category">
+
+<input type="text" id="postRedirect" placeholder="Redirect URL">
+
+<textarea id="postDescription" placeholder="Description"></textarea>
+
+<textarea id="postContent" placeholder="Full Content"></textarea>
+
+<button onclick="publishPost()">
+Publish Post
+</button>
+
+<button class="close-btn" onclick="closePostModal()">
+Close
+</button>
+
+</div>
+
+</div>
+
 <div class="music-player">
-  <button onclick="toggleMusic()">Music</button>
+
+<button onclick="toggleMusic()">
+Music
+</button>
+
 </div>
 
 <a href="https://wa.me/8801764537829" class="whatsapp">
-  WhatsApp
+WhatsApp
 </a>
 
 <script type="module" src="firebase.js"></script>
