@@ -53,7 +53,21 @@ Delete Post
 
 : ''}
 
-<img src="${post.image || ''}">
+${post.image
+
+? `<img src="${post.image}">`
+
+: ''}
+
+${post.video
+
+? `
+<video controls width="100%">
+<source src="${post.video}">
+</video>
+`
+
+: ''}
 
 <div class="content">
 
@@ -134,7 +148,7 @@ alert('Edit system coming soon');
 window.deletePost = async(id)=>{
 
 const confirmDelete =
-confirm('Are you sure to delete this post?');
+confirm('Delete this post?');
 
 if(!confirmDelete) return;
 
@@ -142,7 +156,7 @@ try{
 
 await deleteDoc(doc(db,"posts",id));
 
-alert('Post Deleted Successfully');
+alert('Post Deleted');
 
 location.reload();
 
