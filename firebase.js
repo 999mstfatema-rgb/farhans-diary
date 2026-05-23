@@ -1,12 +1,14 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-import {
-getFirestore
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getAuth }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-import {
-getAuth
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import { getStorage }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
 const firebaseConfig = {
 
@@ -28,6 +30,15 @@ measurementId: "G-5MSXBKMQ63"
 
 const app = initializeApp(firebaseConfig);
 
-export const db = getFirestore(app);
+const auth = getAuth(app);
 
-export const auth = getAuth(app);
+const db = getFirestore(app);
+
+const storage = getStorage(app);
+
+export {
+app,
+auth,
+db,
+storage
+};
