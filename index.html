@@ -1,248 +1,57 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Farhan's Diary</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-body{background:#f5f5f5;color:#111;transition:.3s}
-body.dark{background:#111;color:#fff}
-a{text-decoration:none;color:inherit}
-.header{display:flex;justify-content:space-between;align-items:center;padding:15px 20px;background:#fff;position:sticky;top:0;z-index:999;box-shadow:0 2px 10px rgba(0,0,0,.08)}
-body.dark .header,.card,.dashboard{background:#1c1c1c;color:#fff}
-.logo{font-size:30px;font-weight:700;color:#4f46e5}
-nav{display:flex;gap:15px;flex-wrap:wrap}
-nav a{font-size:14px;font-weight:600}
-.actions{display:flex;gap:10px;align-items:center}
-.actions input{padding:10px;border:none;border-radius:10px;background:#eee;outline:none}
-button{border:none;cursor:pointer}
-.theme-btn,.admin-btn,.publish-btn{padding:10px 15px;border-radius:10px;background:#4f46e5;color:#fff;font-weight:600}
-.hero{padding:100px 20px;text-align:center;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff}
-.hero h1{font-size:50px;margin-bottom:15px}
-.hero p{max-width:700px;margin:auto;line-height:1.8}
-.wrapper{max-width:1300px;margin:auto;padding:40px 20px}
-.posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px}
-.card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,.08);transition:.3s}
-.card:hover{transform:translateY(-5px)}
-.card img{width:100%;height:220px;object-fit:cover}
-.content{padding:20px}
-.badge{display:inline-block;padding:7px 12px;background:#4f46e5;color:#fff;border-radius:30px;font-size:12px;margin-bottom:10px}
-.content h2{margin-bottom:10px;font-size:24px}
-.content p{font-size:14px;line-height:1.7;color:#666}
-body.dark .content p{color:#ccc}
-.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
-.stats button{padding:8px 12px;border-radius:10px;background:#eee}
-.dashboard{position:fixed;top:0;right:-100%;width:350px;height:100vh;background:#fff;box-shadow:-5px 0 20px rgba(0,0,0,.2);padding:20px;overflow:auto;transition:.4s;z-index:9999}
-.dashboard.active{right:0}
-.dashboard h2{margin-bottom:20px}
-.dashboard button{width:100%;margin-bottom:12px;padding:12px;border-radius:10px;color:#fff;font-weight:600}
-.create{background:#4f46e5}.analytics{background:#059669}.music{background:#ea580c}.logout{background:red}
-.editor textarea,.editor input,.editor select{width:100%;margin-bottom:12px;padding:12px;border:none;border-radius:10px;background:#eee;outline:none}
-.footer{background:#111;color:#fff;padding:50px 20px;margin-top:50px;text-align:center}
-.music-player{position:fixed;left:20px;bottom:20px;z-index:999}
-.music-player button{padding:14px 18px;background:#ea580c;color:#fff;border-radius:50px}
-.whatsapp{position:fixed;right:20px;bottom:20px;background:#25D366;color:#fff;padding:14px 18px;border-radius:50px;font-weight:600;z-index:999}
-.single-post{position:fixed;inset:0;background:#fff;overflow:auto;padding:30px;z-index:99999;display:none}
-body.dark .single-post{background:#111;color:#fff}
-.single-post img{width:100%;max-height:400px;object-fit:cover;border-radius:20px;margin-bottom:20px}
-.close-post{padding:10px 15px;background:red;color:#fff;border-radius:10px;margin-bottom:20px}
-@media(max-width:768px){.header{flex-direction:column;gap:15px}.hero h1{font-size:35px}nav{justify-content:center}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Farhan's Diary</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
 </head>
-<body><header class="header">
-<div class="logo">FJR7</div>
-<nav>
-<a href="#">Sports</a>
-<a href="#">News</a>
-<a href="#">Tech</a>
-<a href="#">Earning</a>
-<a href="#">Islamic</a>
-<a href="#">Entertainment</a>
-<a href="#">Music</a>
-</nav>
-<div class="actions">
-<input type="text" id="search" placeholder="Search posts...">
-<button class="theme-btn" onclick="toggleTheme()">Theme</button>
-<button class="admin-btn" onclick="loginAdmin()">Admin</button>
+<body>
+
+<header class="header">
+  <div class="logo">FJR7</div>
+
+  <nav class="nav">
+    <a href="#">Sports</a>
+    <a href="#">News</a>
+    <a href="#">Tech</a>
+    <a href="#">Earning</a>
+    <a href="#">Islamic</a>
+    <a href="#">Entertainment</a>
+    <a href="#">Music</a>
+  </nav>
+
+  <div class="header-actions">
+    <input type="text" id="searchInput" placeholder="Search...">
+    <button onclick="toggleTheme()">Theme</button>
+    <button onclick="adminLogin()">Admin</button>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Farhan's Diary</h1>
+  <p>Modern Blogging Platform</p>
+</section>
+
+<section class="posts-section">
+  <h2>Latest Posts</h2>
+
+  <div class="posts" id="postsContainer"></div>
+</section>
+
+<div class="music-player">
+  <button onclick="toggleMusic()">Music</button>
 </div>
-</header><section class="hero">
-<h1>Farhan's Diary</h1>
-<p>Modern blogging platform with Firebase, admin dashboard, analytics, comments, likes, trending system, music player, redirect system and more.</p>
-</section><div class="wrapper">
-<h2 style="margin-bottom:20px">Latest Posts</h2>
-<div class="posts" id="posts"></div>
-</div><div class="dashboard" id="dashboard">
-<h2>Admin Dashboard</h2>
-<button class="create" onclick="openEditor()">Create Post</button>
-<button class="analytics" onclick="showAnalytics()">Analytics</button>
-<button class="music" onclick="toggleMusic()">Music Player</button>
-<button class="logout" onclick="logoutAdmin()">Logout</button>
-<div id="analyticsBox"></div>
-</div><div class="single-post" id="singlePost"></div><div class="music-player">
-<button onclick="toggleMusic()">Music</button>
-</div><a href="https://wa.me/8801764537829" class="whatsapp">WhatsApp</a>
 
-<footer class="footer">
-<h2>Farhan's Diary</h2>
-<p>© 2026 Farhan's Diary. All rights reserved.</p>
-</footer><script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
-import { getAuth, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+<a href="https://wa.me/8801764537829" class="whatsapp">
+  WhatsApp
+</a>
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyBdbHoaDhKjlydvDL1HDu9KuVSBEeGTkIA',
-  authDomain: 'farhans-diary.firebaseapp.com',
-  projectId: 'farhans-diary',
-  storageBucket: 'farhans-diary.firebasestorage.app',
-  messagingSenderId: '856421576567',
-  appId: '1:856421576567:web:9fe122351bf06902defb72',
-  measurementId: 'G-5MSXBKMQ63'
-};
+<script type="module" src="firebase.js"></script>
+<script type="module" src="app.js"></script>
+<script type="module" src="admin.js"></script>
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-
-const postsContainer = document.getElementById('posts');
-const search = document.getElementById('search');
-
-let totalViews = 0;
-let totalLikes = 0;
-let totalComments = 0;
-
-async function loadPosts(){
-postsContainer.innerHTML='';
-const querySnapshot = await getDocs(collection(db,'posts'));
-querySnapshot.forEach((snap)=>{
-const post = snap.data();
-const id = snap.id;
-
-postsContainer.innerHTML += `
-<div class="card">
-<img src="${post.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=1200&auto=format&fit=crop'}">
-<div class="content">
-<span class="badge">${post.category || 'General'}</span>
-<h2>${post.title}</h2>
-<p>${post.description}</p>
-<div class="stats">
-<button onclick="viewPost('${id}',\`${post.title}\`,\`${post.description}\`,\`${post.image}\`,\`${post.content || ''}\`,\`${post.redirectUrl || ''}\`)">Read</button>
-<button onclick="likePost('${id}')">👍 ${post.likes || 0}</button>
-<button onclick="commentPost('${id}')">💬 ${post.comments || 0}</button>
-<button onclick="sharePost('${id}','${post.title}')">🔗 ${post.shares || 0}</button>
-<button onclick="bookmarkPost('${id}')">⭐</button>
-<button onclick="editPost('${id}')">✏️</button>
-<button onclick="deletePost('${id}')">🗑️</button>
-</div>
-</div>
-</div>
-`;
-});
-}
-
-loadPosts();
-
-window.toggleTheme = ()=>{
-document.body.classList.toggle('dark');
-localStorage.setItem('theme',document.body.classList.contains('dark') ? 'dark':'light');
-}
-
-if(localStorage.getItem('theme') === 'dark'){
-document.body.classList.add('dark');
-}
-
-window.loginAdmin = async()=>{
-const email = prompt('Admin Email');
-const password = prompt('Admin Password');
-
-try{
-await signInWithEmailAndPassword(auth,email,password);
-document.getElementById('dashboard').classList.add('active');
-alert('Admin Login Success');
-}catch(err){
-alert(err.message);
-}
-}
-
-window.logoutAdmin = async()=>{
-await signOut(auth);
-document.getElementById('dashboard').classList.remove('active');
-}
-
-window.openEditor = ()=>{
-const box = document.createElement('div');
-box.className='editor';
-box.innerHTML=`
-<div style="position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:999999">
-<div style="background:#fff;padding:20px;border-radius:20px;width:90%;max-width:500px">
-<h2 style="margin-bottom:15px">Create Post</h2>
-<input id="title" placeholder="Title">
-<input id="image" placeholder="Image URL">
-<input id="category" placeholder="Category">
-<input id="redirect" placeholder="Redirect URL">
-<textarea id="description" placeholder="Description"></textarea><textarea id="content" placeholder="Full Article"></textarea><select id="publish">
-<option value="published">Publish</option>
-<option value="draft">Draft</option>
-</select>
-<button class="publish-btn" onclick="publishPost()">Publish Post</button>
-<button style="margin-top:10px;padding:10px 15px;border-radius:10px;background:red;color:#fff" onclick="this.parentElement.parentElement.remove()">Close</button>
-</div>
-</div>
-`;
-document.body.appendChild(box);
-}window.publishPost = async()=>{ const title = document.getElementById('title').value; const image = document.getElementById('image').value; const category = document.getElementById('category').value; const redirectUrl = document.getElementById('redirect').value; const description = document.getElementById('description').value; const content = document.getElementById('content').value; const status = document.getElementById('publish').value;
-
-await addDoc(collection(db,'posts'),{ title,image,category,redirectUrl,description,content,status, likes:0, shares:0, comments:0, views:0, createdAt:serverTimestamp() });
-
-alert('Post Published'); document.querySelector('.editor').remove(); loadPosts(); }
-
-window.deletePost = async(id)=>{ if(confirm('Delete post?')){ await deleteDoc(doc(db,'posts',id)); loadPosts(); } }
-
-window.editPost = async(id)=>{ const title = prompt('New Title'); await updateDoc(doc(db,'posts',id),{title}); loadPosts(); }
-
-window.likePost = async(id)=>{ alert('Liked Post'); totalLikes++; }
-
-window.commentPost = async(id)=>{ const comment = prompt('Write comment'); if(comment){ alert('Comment Added'); totalComments++; } }
-
-window.sharePost = async(id,title)=>{ if(navigator.share){ await navigator.share({title,url:location.href}); } }
-
-window.bookmarkPost = (id)=>{ let bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]'); bookmarks.push(id); localStorage.setItem('bookmarks',JSON.stringify(bookmarks)); alert('Bookmarked'); }
-
-window.viewPost = (id,title,description,image,content,redirectUrl)=>{ totalViews++;
-
-if(redirectUrl){ window.open(redirectUrl,'_blank'); return; }
-
-const postBox = document.getElementById('singlePost'); postBox.style.display='block'; postBox.innerHTML=` <button class="close-post" onclick="closePost()">Close</button> <img src="${image}">
-
-<h1 style="margin-bottom:15px">${title}</h1>
-<p style="margin-bottom:20px">${description}</p>
-<div style="line-height:1.8">${content}</div>
-`;
-}window.closePost = ()=>{ document.getElementById('singlePost').style.display='none'; }
-
-search.addEventListener('keyup',()=>{ const value = search.value.toLowerCase(); document.querySelectorAll('.card').forEach(card=>{ card.style.display = card.innerText.toLowerCase().includes(value) ? 'block' : 'none'; }); });
-
-const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); window.toggleMusic = ()=>{ if(audio.paused){audio.play()}else{audio.pause()} }
-
-window.showAnalytics = ()=>{ document.getElementById('analyticsBox').innerHTML=`
-
-<div style="margin-top:20px;background:#222;padding:15px;border-radius:15px">
-<p>Total Views: ${totalViews}</p>
-<p>Total Likes: ${totalLikes}</p>
-<p>Total Comments: ${totalComments}</p>
-<p>Total Bookmarks: ${(JSON.parse(localStorage.getItem('bookmarks') || '[]')).length}</p>
-</div>
-`;
-}window.addEventListener('scroll',()=>{ if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 50){ console.log('Infinite Scroll Active'); } });
-
-if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js'); }
-
-Notification.requestPermission();
-
-</script><script>
-if('serviceWorker' in navigator){
-navigator.serviceWorker.register('sw.js');
-}
-</script></body>
+</body>
 </html>
