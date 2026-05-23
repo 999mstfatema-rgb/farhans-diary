@@ -1,127 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Farhan's Diary</title>
+
+<title>FJR7</title>
 
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="style.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f3f4f6;
+color:#111;
+padding:15px;
+}
+
+.dark{
+background:#111827;
+color:#fff;
+}
+
+.logo{
+text-align:center;
+font-size:50px;
+font-weight:900;
+color:#1e1b8f;
+margin-top:10px;
+}
+
+.category-bar{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:14px;
+margin-top:20px;
+margin-bottom:20px;
+}
+
+.category-bar button{
+padding:10px 14px;
+border:none;
+border-radius:10px;
+background:#fff;
+font-weight:700;
+cursor:pointer;
+}
+
+.dark .category-bar button{
+background:#1f2937;
+color:#fff;
+}
+
+.top-actions{
+display:flex;
+gap:10px;
+margin-bottom:20px;
+}
+
+.top-actions button{
+padding:12px;
+border:none;
+border-radius:12px;
+background:#1e1b8f;
+color:#fff;
+font-weight:700;
+cursor:pointer;
+flex:1;
+}
+
+.search-box{
+margin-bottom:20px;
+}
+
+.search-box input{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+font-size:16px;
+}
+
+.card{
+background:#fff;
+border-radius:18px;
+overflow:hidden;
+margin-bottom:20px;
+position:relative;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.dark .card{
+background:#1f2937;
+}
+
+.card img{
+width:100%;
+display:block;
+}
+
+.card video{
+width:100%;
+display:block;
+}
+
+.content{
+padding:15px;
+}
+
+.badge{
+display:inline-block;
+padding:6px 12px;
+border-radius:30px;
+background:#ea580c;
+color:#fff;
+font-size:13px;
+margin-bottom:10px;
+}
+
+.content h2{
+font-size:24px;
+margin-bottom:10px;
+}
+
+.content p{
+font-size:15px;
+line-height:1.6;
+margin-bottom:15px;
+}
+
+.read-btn{
+display:inline-block;
+padding:12px 20px;
+background:#16a34a;
+color:#fff;
+text-decoration:none;
+border-radius:12px;
+font-weight:700;
+}
+
+.stats{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-bottom:15px;
+}
+
+.stats button{
+padding:8px 12px;
+border:none;
+border-radius:10px;
+background:#e5e7eb;
+font-weight:700;
+cursor:pointer;
+}
+
+.dark .stats button{
+background:#374151;
+color:#fff;
+}
+
+.three-dot{
+position:absolute;
+top:10px;
+right:10px;
+background:#fff;
+padding:8px 12px;
+border-radius:10px;
+cursor:pointer;
+font-size:22px;
+font-weight:bold;
+z-index:10;
+}
+
+.dropdown{
+display:none;
+position:absolute;
+top:50px;
+right:10px;
+background:#fff;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 2px 10px rgba(0,0,0,.2);
+z-index:10;
+}
+
+.dropdown button{
+display:block;
+width:100%;
+padding:12px 18px;
+border:none;
+background:#fff;
+cursor:pointer;
+text-align:left;
+font-weight:700;
+}
+
+.dropdown button:hover{
+background:#f3f4f6;
+}
+
+.modal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.6);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:99999;
+padding:15px;
+overflow:auto;
+}
+
+.modal-box{
+background:#fff;
+width:100%;
+max-width:650px;
+padding:20px;
+border-radius:20px;
+}
+
+.modal-box h1{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.modal-box input,
+.modal-box textarea,
+.modal-box select{
+width:100%;
+padding:18px;
+margin-bottom:15px;
+border:none;
+border-radius:14px;
+background:#f3f4f6;
+font-size:17px;
+}
+
+.modal-box textarea{
+min-height:130px;
+resize:vertical;
+}
+
+.modal-box button{
+width:100%;
+padding:16px;
+border:none;
+border-radius:14px;
+font-size:20px;
+font-weight:700;
+cursor:pointer;
+margin-bottom:10px;
+}
+
+.publish-btn{
+background:#4f46e5;
+color:#fff;
+}
+
+.close-btn{
+background:red;
+color:#fff;
+}
+
+@media(max-width:768px){
+
+.logo{
+font-size:42px;
+}
+
+.content h2{
+font-size:22px;
+}
+
+.modal-box h1{
+font-size:30px;
+}
+
+}
+
+</style>
 
 </head>
-<body>
 
-<header class="header">
+<body>
 
 <div class="logo">
 FJR7
 </div>
 
-<nav class="nav">
+<div class="category-bar">
 
-<a href="#">Sports</a>
-<a href="#">News</a>
-<a href="#">Tech</a>
-<a href="#">Earning</a>
-<a href="#">Islamic</a>
-<a href="#">Entertainment</a>
-<a href="#">Music</a>
+<button>Sports</button>
 
-</nav>
+<button>News</button>
 
-<div class="header-actions">
+<button>Tech</button>
 
-<input type="text" id="searchInput" placeholder="Search...">
+<button>Earning</button>
+
+<button>Islamic</button>
+
+<button>Entertainment</button>
+
+<button>Music</button>
+
+</div>
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search...">
+
+</div>
+
+<div class="top-actions">
 
 <button onclick="toggleTheme()">
 Theme
 </button>
 
-<button id="adminBtn" onclick="openLoginModal()">
+<button onclick="openLoginModal()">
 Admin Login
 </button>
-
-</div>
-
-</header>
-
-<section class="hero">
-
-<h1>Farhan's Diary</h1>
-
-<p>
-Modern Blogging Platform
-</p>
-
-</section>
-
-<section class="posts-section">
-
-<h2>Latest Posts</h2>
-
-<div class="posts" id="postsContainer"></div>
-
-</section>
-
-<!-- LOGIN MODAL -->
-
-<div class="login-modal" id="loginModal">
-
-<div class="login-box">
-
-<h2>Admin Login</h2>
-
-<input type="email" id="adminEmail" placeholder="Email">
-
-<input type="password" id="adminPassword" placeholder="Password">
-
-<button onclick="adminLogin()">
-Login
-</button>
-
-<button class="close-btn" onclick="closeLoginModal()">
-Close
-</button>
-
-</div>
-
-</div>
-
-<!-- CREATE POST MODAL -->
-
-<div class="post-modal" id="postModal">
-
-<div class="post-box">
-
-<h2>Create New Post</h2>
-
-<input type="text" id="postTitle" placeholder="Post Title">
-
-<input type="text" id="postImage" placeholder="Image URL">
-
-<input type="text" id="postVideo" placeholder="Video URL">
-
-<input type="text" id="postCategory" placeholder="Category">
-
-<input type="text" id="postRedirect" placeholder="Redirect URL">
-
-<textarea id="postDescription" placeholder="Description"></textarea>
-
-<textarea id="postContent" placeholder="Full Content"></textarea>
-
-<button onclick="publishPost()">
-Publish Post
-</button>
-
-<button class="close-btn" onclick="closePostModal()">
-Close
-</button>
-
-</div>
-
-</div>
-
-<div class="music-player">
 
 <button onclick="toggleMusic()">
 Music
@@ -129,13 +344,149 @@ Music
 
 </div>
 
-<a href="https://wa.me/8801764537829" class="whatsapp">
-WhatsApp
-</a>
+<div id="postsContainer"></div>
+
+<!-- LOGIN MODAL -->
+
+<div id="loginModal" class="modal">
+
+<div class="modal-box">
+
+<h1>Admin Login</h1>
+
+<input
+type="email"
+id="adminEmail"
+placeholder="Admin Email">
+
+<input
+type="password"
+id="adminPassword"
+placeholder="Admin Password">
+
+<button
+class="publish-btn"
+onclick="adminLogin()">
+
+Login
+
+</button>
+
+<button
+class="close-btn"
+onclick="closeLoginModal()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+<!-- POST MODAL -->
+
+<div id="postModal" class="modal">
+
+<div class="modal-box">
+
+<h1>Create New Post</h1>
+
+<input
+type="text"
+id="postTitle"
+placeholder="Post Title">
+
+<input
+type="file"
+id="postImage"
+accept="image/*">
+
+<input
+type="file"
+id="postVideo"
+accept="video/*">
+
+<select id="postCategory">
+
+<option value="News">
+News
+</option>
+
+<option value="Sports">
+Sports
+</option>
+
+<option value="Entertainment">
+Entertainment
+</option>
+
+<option value="Technology">
+Technology
+</option>
+
+<option value="Islamic">
+Islamic
+</option>
+
+<option value="Gaming">
+Gaming
+</option>
+
+<option value="Music">
+Music
+</option>
+
+</select>
+
+<input
+type="text"
+id="postRedirect"
+placeholder="Redirect URL">
+
+<textarea
+id="postDescription"
+placeholder="Description"></textarea>
+
+<textarea
+id="postContent"
+placeholder="Full Content"></textarea>
+
+<button
+class="publish-btn"
+onclick="publishPost()">
+
+Publish Post
+
+</button>
+
+<button
+class="close-btn"
+onclick="closePostModal()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
 
 <script type="module" src="firebase.js"></script>
-<script type="module" src="app.js"></script>
+
 <script type="module" src="admin.js"></script>
+
+<script type="module" src="app.js"></script>
+
+<script>
+
+if('serviceWorker' in navigator){
+
+navigator.serviceWorker.register('./sw.js');
+
+}
+
+</script>
 
 </body>
 </html>
