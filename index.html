@@ -65,6 +65,7 @@ color:#fff;
 display:flex;
 gap:10px;
 margin-bottom:20px;
+flex-wrap:wrap;
 }
 
 .top-actions button{
@@ -76,6 +77,7 @@ color:#fff;
 font-weight:700;
 cursor:pointer;
 flex:1;
+min-width:120px;
 }
 
 .search-box{
@@ -215,26 +217,47 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,.6);
+background:rgba(0,0,0,.65);
 display:none;
 justify-content:center;
-align-items:center;
-z-index:99999;
-padding:15px;
-overflow:auto;
+align-items:flex-start;
+overflow-y:auto;
+z-index:999999;
+padding:20px 10px;
 }
 
 .modal-box{
 background:#fff;
 width:100%;
 max-width:650px;
+border-radius:24px;
 padding:20px;
-border-radius:20px;
+margin-top:20px;
+margin-bottom:20px;
+animation:popup .25s ease;
+box-shadow:0 10px 40px rgba(0,0,0,.25);
+}
+
+@keyframes popup{
+
+from{
+transform:scale(.9);
+opacity:0;
+}
+
+to{
+transform:scale(1);
+opacity:1;
+}
+
 }
 
 .modal-box h1{
-font-size:42px;
+font-size:34px;
+font-weight:900;
 margin-bottom:20px;
+color:#111;
+line-height:1.2;
 }
 
 .modal-box input,
@@ -242,27 +265,36 @@ margin-bottom:20px;
 .modal-box select{
 width:100%;
 padding:18px;
-margin-bottom:15px;
+margin-bottom:16px;
 border:none;
-border-radius:14px;
+outline:none;
+border-radius:18px;
 background:#f3f4f6;
 font-size:17px;
+color:#111;
 }
 
 .modal-box textarea{
-min-height:130px;
+min-height:140px;
 resize:vertical;
+}
+
+.modal-box input[type="file"]{
+background:#f3f4f6;
+padding:20px;
+font-size:16px;
 }
 
 .modal-box button{
 width:100%;
-padding:16px;
+padding:18px;
 border:none;
-border-radius:14px;
-font-size:20px;
-font-weight:700;
+border-radius:18px;
+font-size:22px;
+font-weight:800;
 cursor:pointer;
-margin-bottom:10px;
+margin-top:10px;
+transition:.2s;
 }
 
 .publish-btn{
@@ -270,9 +302,38 @@ background:#4f46e5;
 color:#fff;
 }
 
+.publish-btn:hover{
+opacity:.92;
+}
+
 .close-btn{
 background:red;
 color:#fff;
+}
+
+.close-btn:hover{
+opacity:.92;
+}
+
+.dark .modal-box{
+background:#1f2937;
+}
+
+.dark .modal-box h1{
+color:#fff;
+}
+
+.dark .modal-box input,
+.dark .modal-box textarea,
+.dark .modal-box select,
+.dark .modal-box input[type="file"]{
+background:#111827;
+color:#fff;
+}
+
+.dark .modal-box input::placeholder,
+.dark .modal-box textarea::placeholder{
+color:#cbd5e1;
 }
 
 @media(max-width:768px){
@@ -285,8 +346,29 @@ font-size:42px;
 font-size:22px;
 }
 
+.modal{
+padding:14px 8px;
+}
+
+.modal-box{
+padding:16px;
+border-radius:20px;
+}
+
 .modal-box h1{
-font-size:30px;
+font-size:28px;
+}
+
+.modal-box input,
+.modal-box textarea,
+.modal-box select{
+padding:16px;
+font-size:16px;
+}
+
+.modal-box button{
+font-size:20px;
+padding:16px;
 }
 
 }
